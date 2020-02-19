@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   Schemes.find()
   .then(schemes => {
-    res.json(schemes);
+    res.status(200).json(schemes);
   })
   .catch(err => {
     res.status(500).json({ message: 'Failed to get schemes' });
@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
   Schemes.findById(id)
   .then(scheme => {
     if (scheme) {
-      res.json(scheme);
+      res.status(200).json(scheme);
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id.' })
     }
@@ -36,7 +36,7 @@ router.get('/:id/steps', (req, res) => {
   Schemes.findSteps(id)
   .then(steps => {
     if (steps.length) {
-      res.json(steps);
+      res.status(200).json(steps);
     } else {
       res.status(404).json({ message: 'Could not find steps for given scheme' })
     }
